@@ -6,7 +6,7 @@ This symfony3 bundle allows you to get JSON-encoded locations data stored in pre
 Transport layer is provided by third-party bundle [guzzlehttp/guzzle](https://github.com/guzzle/guzzle).
 
 You can find more
-information about Buzz on its dedicated page at
+information about For8BitBundle on its dedicated page at
 https://github.com/ilias25/for8bit-bundle.
 
 ## Installation
