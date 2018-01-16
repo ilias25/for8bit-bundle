@@ -1,0 +1,13 @@
+parameters:
+    ilias25_for_8bit.geo.google.settings:
+      url: https://maps.googleapis.com/maps/api/place/textsearch/json
+      key: AIzaSyD04UVTyY33o2RdGkUUfxfZLquJTDaiSBA
+
+services:
+   ilias25_for_8bit.client:
+       class: GuzzleHttp\Client
+       arguments: []
+
+   ilias25_for_8bit.geo.google:
+       class: Ilias25\For8BitBundle\Services\GoogleGeoService
+       arguments: ['@ilias25_for_8bit.client', '%ilias25_for_8bit.geo.google.settings%']

@@ -1,0 +1,8 @@
+ilias25_for_8bit_homepage:
+    path:     /
+    defaults: { _controller: For8BitBundle:Default:index }
+
+ilias25_for_8bit_get:
+    path:     /get
+    defaults: { _controller: For8BitBundle:Default:get }
+    methods: [GET, POST]

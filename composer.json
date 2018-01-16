@@ -1,0 +1,25 @@
+{
+    "name" : "ilias25/for8bit-bundle",
+    "description" : "Symfony3 bundle for getting JSON-encoded locations data stored in predefined format",
+    "version" : "1.0.0",
+    "type" : "symfony-bundle",
+    "homepage": "https://github.com/ilias25/for8bit-bundle",
+    "license" : "MIT",
+    "keywords" : ["8bit"],
+    "authors" : [{
+        "name" : "Ilya"
+    }],
+    "require" : {
+        "php": ">=7.0.0",
+        "symfony/symfony": ">=3.1.4",
+        "guzzlehttp/guzzle": "~6.2"
+    },
+    "autoload" : {
+        "psr-4" : { "Ilias25\\For8BitBundle\\" : "For8BitBundle" }
+    },
+    "extra" : {
+      "branch-alias" : {
+      "dev-master" : "1.0.x-dev"
+    }
+  }
+}

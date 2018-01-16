@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Symfony3 bundle for getting JSON-encoded locations data</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <style>
+        .fixed-500 {
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div data-role="main" class="ui-content">
+        <h1>
+            Enter the place you wish to get coordinates!
+        </h1>
+
+        <div class="fixed-500">
+            {{ form_start(form) }}
+
+            {{ form_row(form.text) }}
+
+            {{ form_end(form) }}
+            <button class="ajax">Get coordinates</button>
+        </div>
+
+        <div id="ajax-results"></div>
+    </div>
+
+<script type="application/javascript">
+    $(document).on('click', 'button.ajax', function(){
+        var data = {};
+        data['{{ form.text.vars.name }}'] = $('#{{ form.text.vars.id }}')[0].value;
+
+        $.ajax({
+            url:'{{ (path('ilias25_for_8bit_get')) }}',
+            type: "GET",
+            dataType: "json",
+            data : data,
+            async: true,
+            success: function (data)
+            {
+                console.log(data);
+                var myJSON = JSON.stringify(data);
+
+                // formatting json to html
+                var indent = {brace: 0};
+                var myHTML = myJSON.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, function (m, p1) {
+                    var rtnFn = function() {
+                        return '<div style="text-indent: ' + (indent['brace'] * 20) + 'px;">' + p1 + '</div>';
+                    };
+
+                    rtnStr = 0;
+                    if (p1.lastIndexOf('{') === (p1.length - 1)) {
+                        rtnStr = rtnFn();
+                        indent['brace'] += 1;
+                    } else if (p1.indexOf('}') === 0) {
+                        indent['brace'] -= 1;
+                        rtnStr = rtnFn();
+                    } else {
+                        rtnStr = rtnFn();
+                    }
+
+                    return rtnStr;
+                });
+
+                $('div#ajax-results').html(myHTML);
+            }
+        });
+        return false;
+    });
+</script>
+
+</body>
+</html>
